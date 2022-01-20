@@ -1,28 +1,45 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+    <div id="app">
+        <div class="content">
+            <UsersTable/>
+        </div>
+    </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import UsersTable from '@/layout/UsersTable/index.vue';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+    name: 'App',
+    components: {
+        UsersTable
+    }
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+*,
+*::before,
+*::after{
+    box-sizing: border-box;
+}
+html,
+body{
+    min-height: 100vh;
+}
+body{
+    display: flex;
+    justify-content: center;
+    padding: 12px;
+    margin: 0;
+}
+
+#app{
+    width: 100%;
+    max-width: 600px;
+}
+
+.error{
+    color: red;
 }
 </style>
