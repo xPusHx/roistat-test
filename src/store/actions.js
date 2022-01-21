@@ -35,8 +35,8 @@ const actions = {
                 .then(data => {
                     const {users} = data;
                     setUserId(users);
-                    resolve(users);
                     commit('saveUsers', users);
+                    resolve(users);
                 })
                 .catch(error => {
                     reject(error);

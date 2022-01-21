@@ -17,11 +17,11 @@
             <div class="error" v-if="getUsersError">Произошла ошибка</div>
             <AppSelect
                 id="users-add-head"
+                v-else
                 :key="head"
                 :options="usersOptions"
                 :value="head"
-                @change="setHead"
-                v-else/>
+                @change="setHead"/>
         </div>
 
         <div class="form-group">
@@ -65,6 +65,8 @@ const addNewInnerUser = (head, users, newUser) => {
     });
 };
 
+let usersLoaded = false;
+
 export default {
     name: 'AppUsersAdd',
 
@@ -73,18 +75,39 @@ export default {
         AppSelect
     },
 
+    props: {
+        isShown: {
+            type: Boolean,
+            default: false
+        }
+    },
+
     data() {
         return {
+            getUsersError: false,
             name: '',
             phone: '',
             head: '',
             users: [],
-            usersOptions: [],
-            getUsersError: false
+            usersOptions: []
         };
     },
 
     watch: {
+        isShown() {
+            if (usersLoaded) return;
+
+            usersLoaded = true;
+            store.dispatch('getUsers')
+                .then(users => {
+                    this.users = users;
+                })
+                .catch(error => {
+                    console.error(error);
+                    this.getUsersError = true;
+                });
+        },
+
         users: {
             handler() {
                 const usersOptions = [];
@@ -93,17 +116,6 @@ export default {
             },
             deep: true
         }
-    },
-
-    created() {
-        store.dispatch('getUsers')
-            .then(users => {
-                this.users = users;
-            })
-            .catch(error => {
-                console.error(error);
-                this.getUsersError = true;
-            });
     },
 
     methods: {
@@ -115,7 +127,7 @@ export default {
             this.name = '';
             this.phone = '';
             this.head = '';
-            this.$forceUpdate();
+            this.$forceUpdate(); //Необходимо вызывать, т.к. могут обновиться внутренние объекты массива с пользователями
         },
 
         addUser() {

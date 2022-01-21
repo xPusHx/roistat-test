@@ -39,13 +39,13 @@
                 </div>
 
                 <AppTable
+                    v-if="row.inner"
                     :header-cols="headerCols"
                     :body-data="row.inner"
                     :inner="true"
                     :sort-col="stateSortCol"
                     :desc-sort="stateDescSort"
-                    :collapsed="row.collapsed"
-                    v-if="row.inner"/>
+                    :collapsed="row.collapsed"/>
             </div>
         </div>
     </div>

@@ -1,13 +1,14 @@
 <template>
-    <div class="users-table">
+    <div class="users-table" :class="{disabled: loading}">
         <div class="error" v-if="getUsersError">Произошла ошибка</div>
         <template v-else>
-            <AppButton @click.native="showUserAddPopup()">Добавить</AppButton>
+            <AppButton @click.native="showUserAddPopup">Добавить</AppButton>
 
-            <AppTable :header-cols="tableCols" :body-data="tableData"/>
+            <div class="loading" v-if="loading">Загрузка…</div>
+            <AppTable v-else :header-cols="tableCols" :body-data="tableData"/>
 
-            <AppPopup :is-shown="isPopupShown" @hide="hideUserAddPopup()">
-                <AppUsersAdd @submit="userAdded()"/>
+            <AppPopup :is-shown="isPopupShown" @hide="hideUserAddPopup">
+                <AppUsersAdd :is-shown="isPopupShown" @submit="userAdded"/>
             </AppPopup>
         </template>
     </div>
@@ -52,6 +53,8 @@ export default {
 
     data() {
         return {
+            loading: true,
+            getUsersError: false,
             isPopupShown: false,
             tableCols: [
                 {
@@ -63,8 +66,7 @@ export default {
                     width: 60
                 }
             ],
-            tableData: [],
-            getUsersError: false
+            tableData: []
         };
     },
 
@@ -72,6 +74,7 @@ export default {
         store.dispatch('getUsers')
             .then(users => {
                 this.populateTableData(users);
+                this.loading = false;
             })
             .catch(error => {
                 console.error(error);
@@ -107,8 +110,17 @@ export default {
     display: flex;
     flex-wrap: wrap;
 }
+.users-table.disabled{
+    cursor: default;
+    pointer-events: none;
+    opacity: .65;
+}
 .users-table > .button{
     margin-left: auto;
+}
+.users-table > .loading{
+    min-width: 100%;
+    text-align: center;
 }
 .users-table > .table{
     margin-top: 1rem;
