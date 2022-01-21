@@ -146,7 +146,7 @@ export default {
 
             this.reset();
 
-            store.commit('saveUsers', this.users);
+            store.dispatch('setUsers', this.users);
             this.$emit('submit');
         }
     }

@@ -1,7 +1,9 @@
 const mutations = {
-    saveUsers(state, users) {
+    setUsersToState(state, users) {
         state.users = users;
+    },
 
+    setUsersToStorage(state, users) {
         localStorage.users = JSON.stringify(users);
     }
 };
