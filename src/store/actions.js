@@ -17,7 +17,7 @@ const actions = {
         commit('setUsersToStorage', users);
     },
 
-    getUsers({state, dispatch}) {
+    fetchUsers({state, dispatch}) {
         return new Promise((resolve, reject) => {
             //Берём из стора
             if (state.users) {

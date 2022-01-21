@@ -71,7 +71,7 @@ export default {
     },
 
     created() {
-        store.dispatch('getUsers')
+        store.dispatch('fetchUsers')
             .then(users => {
                 this.populateTableData(users);
                 this.loading = false;

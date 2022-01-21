@@ -98,7 +98,7 @@ export default {
             if (usersLoaded) return;
 
             usersLoaded = true;
-            store.dispatch('getUsers')
+            store.dispatch('fetchUsers')
                 .then(users => {
                     this.users = users;
                 })
