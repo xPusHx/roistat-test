@@ -11,6 +11,7 @@ import UsersTable from '@/layout/UsersTable/index.vue';
 
 export default {
     name: 'App',
+
     components: {
         UsersTable
     }

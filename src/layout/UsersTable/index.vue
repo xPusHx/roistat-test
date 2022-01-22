@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {store, state} from '@/store';
+import {mapActions, mapState} from 'vuex';
 
 import AppButton from '@/components/Button/index.vue';
 import AppPopup from '@/components/Popup/index.vue';
@@ -70,8 +70,12 @@ export default {
         };
     },
 
+    computed: mapState([
+        'users'
+    ]),
+
     created() {
-        store.dispatch('fetchUsers')
+        this.fetchUsers()
             .then(users => {
                 this.populateTableData(users);
                 this.loading = false;
@@ -83,6 +87,10 @@ export default {
     },
 
     methods: {
+        ...mapActions([
+            'fetchUsers'
+        ]),
+
         showUserAddPopup() {
             this.isPopupShown = true;
         },
@@ -97,7 +105,7 @@ export default {
         },
 
         userAdded() {
-            this.populateTableData(state.users);
+            this.populateTableData(this.users);
 
             this.hideUserAddPopup();
         }

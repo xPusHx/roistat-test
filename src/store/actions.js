@@ -12,11 +12,6 @@ const setUserId = users => {
 const mockJson = 'https://api.npoint.io/c3277fda8171ef6d6bc1';
 
 const actions = {
-    setUsers({commit}, users) {
-        commit('setUsersToState', users);
-        commit('setUsersToStorage', users);
-    },
-
     fetchUsers({state, dispatch}) {
         return new Promise((resolve, reject) => {
             //Берём из стора
@@ -47,6 +42,11 @@ const actions = {
                     reject(error);
                 });
         });
+    },
+
+    setUsers({commit}, users) {
+        commit('setUsersToState', users);
+        commit('setUsersToStorage', users);
     }
 };
 

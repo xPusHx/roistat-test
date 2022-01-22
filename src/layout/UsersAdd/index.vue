@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import {store} from '@/store';
+import {mapActions} from 'vuex';
 
 import {getUniqueUserId} from '@/base/util.js';
 
@@ -98,7 +98,7 @@ export default {
             if (usersLoaded) return;
 
             usersLoaded = true;
-            store.dispatch('fetchUsers')
+            this.fetchUsers()
                 .then(users => {
                     this.users = users;
                 })
@@ -119,6 +119,11 @@ export default {
     },
 
     methods: {
+        ...mapActions([
+            'fetchUsers',
+            'setUsers'
+        ]),
+
         setHead(value) {
             this.head = value;
         },
@@ -146,7 +151,7 @@ export default {
 
             this.reset();
 
-            store.dispatch('setUsers', this.users);
+            this.setUsers(this.users);
             this.$emit('submit');
         }
     }
