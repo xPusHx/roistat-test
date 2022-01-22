@@ -15,7 +15,7 @@ const actions = {
     fetchUsers({state, dispatch}) {
         return new Promise((resolve, reject) => {
             //Берём из стора
-            if (state.users) {
+            if (state.users.length > 0) {
                 resolve(state.users);
                 return;
             }
