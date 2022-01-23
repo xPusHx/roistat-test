@@ -158,17 +158,19 @@ export default {
 };
 </script>
 
-<style>
-.users-add .form-group{
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 1.5rem;
-}
-.users-add .form-label{
-    width: 40%;
-}
-.users-add .form-control,
-.users-add .select{
-    width: 60%;
+<style lang="scss">
+.users-add{
+    .form-group{
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 1.5rem;
+    }
+    .form-label{
+        width: 40%;
+    }
+    .form-control,
+    .select{
+        width: 60%;
+    }
 }
 </style>

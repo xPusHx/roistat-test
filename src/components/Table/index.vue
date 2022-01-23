@@ -164,52 +164,54 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .table{
     width: 100%;
     max-width: 600px;
-}
-.table__head .table__cell{
-    justify-content: space-between;
-    border-bottom: 2px solid #ddd;
-}
-.table__row{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    margin-left: 1px;
-}
-.table__row .table{
-    padding-left: 20px;
-}
-.table__cell{
-    display: flex;
-    border: 1px solid #ddd;
-    margin-top: -1px;
-    margin-left: -1px;
-    padding: 6px 8px;
-}
-.table__sort{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: none;
-    border: none;
-    cursor: pointer;
-    border-radius: 2px;
-}
-.table__sort.active{
-    background: #000;
-    color: #fff;
-}
-.table__sort.descending{
-    transform: scaleY(-1);
-}
-.table__collapse{
-    width: 22px;
-    border: 1px solid #ddd;
-    border-radius: 2px;
-    cursor: pointer;
-    margin-right: 8px;
+    &__head{
+        .table__cell{
+            justify-content: space-between;
+            border-bottom: 2px solid #ddd;
+        }
+    }
+    &__row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin-left: 1px;
+        .table{
+            padding-left: 20px;
+        }
+    }
+    &__cell{
+        display: flex;
+        border: 1px solid #ddd;
+        margin-top: -1px;
+        margin-left: -1px;
+        padding: 6px 8px;
+    }
+    &__sort{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: none;
+        cursor: pointer;
+        border-radius: 2px;
+        &.active{
+            background: #000;
+            color: #fff;
+        }
+        &.descending{
+            transform: scaleY(-1);
+        }
+    }
+    &__collapse{
+        width: 22px;
+        border: 1px solid #ddd;
+        border-radius: 2px;
+        cursor: pointer;
+        margin-right: 8px;
+    }
 }
 </style>

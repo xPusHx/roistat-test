@@ -113,24 +113,24 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .users-table{
     display: flex;
     flex-wrap: wrap;
-}
-.users-table.disabled{
-    cursor: default;
-    pointer-events: none;
-    opacity: .65;
-}
-.users-table > .button{
-    margin-left: auto;
-}
-.users-table > .loading{
-    min-width: 100%;
-    text-align: center;
-}
-.users-table > .table{
-    margin-top: 1rem;
+    &.disabled{
+        cursor: default;
+        pointer-events: none;
+        opacity: .65;
+    }
+    & > .button{
+        margin-left: auto;
+    }
+    & > .loading{
+        min-width: 100%;
+        text-align: center;
+    }
+    & > .table{
+        margin-top: 1rem;
+    }
 }
 </style>
