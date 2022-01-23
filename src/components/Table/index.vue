@@ -120,6 +120,7 @@ export default {
         stateDescSort() {
             this.sortTableData();
         },
+
         collapsed() {
             this.stateCollapsed = this.collapsed;
         }

@@ -33,24 +33,10 @@ export default {
         }
     },
 
-    data() {
-        return {
-            stateValue: ''
-        }
-    },
-
-    watch: {
+    computed: {
         stateValue() {
-            this.stateValue = this.value;
+            return this.value;
         }
-    },
-
-    created() {
-        this.stateValue = this.value;
-    },
-
-    updated() {
-        this.stateValue = this.value;
     },
 
     methods: {
