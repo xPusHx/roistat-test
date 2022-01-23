@@ -17,11 +17,11 @@
 <script>
 import {mapActions, mapState} from 'vuex';
 
-import AppButton from '@/components/Button/index.vue';
-import AppPopup from '@/components/Popup/index.vue';
-import AppTable from '@/components/Table/index.vue';
+import AppButton from '@/components/Button';
+import AppPopup from '@/components/Popup';
+import AppTable from '@/components/Table';
 
-import AppUsersAdd from '@/layout/UsersAdd/index.vue';
+import AppUsersAdd from '@/layout/UsersAdd';
 
 const populateTableData = (tableData, users) => {
     users.forEach(user => {

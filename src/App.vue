@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import UsersTable from '@/layout/UsersTable/index.vue';
+import UsersTable from '@/layout/UsersTable';
 
 export default {
     name: 'App',

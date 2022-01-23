@@ -35,8 +35,8 @@ import {mapActions} from 'vuex';
 
 import {getUniqueUserId} from '@/base/util.js';
 
-import AppButton from '@/components/Button/index.vue';
-import AppSelect from '@/components/Select/index.vue';
+import AppButton from '@/components/Button';
+import AppSelect from '@/components/Select';
 
 const populateOptions = (options, users) => {
     users.forEach(user => {
