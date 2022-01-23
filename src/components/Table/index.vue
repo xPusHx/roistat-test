@@ -108,6 +108,12 @@ export default {
             this.resetState();
         },
 
+        sortCol() {
+            this.stateSortCol = this.sortCol;
+        },
+        descSort() {
+            this.stateDescSort = this.descSort;
+        },
         stateSortCol() {
             this.sortTableData();
         },
@@ -153,7 +159,6 @@ export default {
 
         sortTable(colIndex) {
             this.stateSortCol = colIndex;
-            this.sortTableData();
             this.stateDescSort = !this.stateDescSort;
         },
 
