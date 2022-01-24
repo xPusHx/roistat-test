@@ -33,10 +33,25 @@ export default {
         }
     },
 
-    computed: {
-        stateValue() {
-            return this.value;
+    data() {
+        return {
+            stateValue: ''
         }
+    },
+
+    watch: {
+        value() {
+            this.stateValue = this.value;
+            return this.value;
+        },
+
+        created() {
+            this.stateValue = this.value;
+        },
+
+        updated() {
+            this.stateValue = this.value;
+        },
     },
 
     methods: {

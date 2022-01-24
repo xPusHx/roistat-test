@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {mapActions} from 'vuex';
 
 import {getUniqueUserId} from '@/base/util.js';
@@ -54,7 +55,8 @@ const addNewInnerUser = (head, users, newUser) => {
     return users.find(user => {
         if (user.id === head) {
             if (!user.users) {
-                user.users = [];
+                //user.users = [];
+                Vue.set(user, 'users', []);
             }
             user.users.push(newUser);
             return true;
@@ -132,7 +134,6 @@ export default {
             this.name = '';
             this.phone = '';
             this.head = '';
-            this.$forceUpdate(); //Необходимо вызывать, т.к. могут обновиться внутренние объекты массива с пользователями
         },
 
         addUser() {
