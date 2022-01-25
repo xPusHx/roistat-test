@@ -105,7 +105,8 @@ export default {
 
     watch: {
         bodyData() {
-            this.resetState();
+            this.sortedData = [...this.bodyData];
+            this.sortTableData();
         },
 
         sortCol() {

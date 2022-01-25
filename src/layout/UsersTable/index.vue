@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import Vue from 'vue';
 import {mapActions, mapState} from 'vuex';
 
 import AppButton from '@/components/Button';
@@ -24,20 +25,26 @@ import AppTable from '@/components/Table';
 import AppUsersAdd from '@/layout/UsersAdd';
 
 const populateTableData = (tableData, users) => {
-    users.forEach(user => {
-        const rowData = {
-            cols: [
-                user.name,
-                user.phone
-            ],
-            id: user.id,
-            collapsed: true
-        };
+    users.forEach((user, userIndex) => {
+        let rowData = tableData[userIndex];
+        if (!rowData || (rowData.id !== user.id)) {
+            rowData = {
+                cols: [
+                    user.name,
+                    user.phone
+                ],
+                id: user.id,
+                collapsed: true
+            };
+            tableData.push(rowData);
+        }
+
         if (user.users) {
-            rowData.inner = [];
+            if (!rowData.inner) {
+                Vue.set(rowData, 'inner', []);
+            }
             populateTableData(rowData.inner, user.users);
         }
-        tableData.push(rowData);
     });
 };
 
@@ -99,9 +106,7 @@ export default {
         },
 
         populateTableData(users) {
-            const tableData = [];
-            populateTableData(tableData, users);
-            this.tableData = tableData;
+            populateTableData(this.tableData, users);
         },
 
         userAdded() {

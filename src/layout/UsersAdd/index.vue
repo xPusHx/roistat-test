@@ -55,7 +55,6 @@ const addNewInnerUser = (head, users, newUser) => {
     return users.find(user => {
         if (user.id === head) {
             if (!user.users) {
-                //user.users = [];
                 Vue.set(user, 'users', []);
             }
             user.users.push(newUser);
