@@ -43,15 +43,15 @@ export default {
         value() {
             this.stateValue = this.value;
             return this.value;
-        },
+        }
+    },
 
-        created() {
-            this.stateValue = this.value;
-        },
+    created() {
+        this.stateValue = this.value;
+    },
 
-        updated() {
-            this.stateValue = this.value;
-        },
+    updated() {
+        this.stateValue = this.value;
     },
 
     methods: {
