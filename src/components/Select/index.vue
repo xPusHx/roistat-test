@@ -1,5 +1,5 @@
 <template>
-    <select class="select" :id="id" v-model="stateValue" @change="change">
+    <select class="select" :id="id" v-model="valueLocal" @change="change">
         <option value=""></option>
         <option
             v-for="(option, index) in options"
@@ -35,28 +35,20 @@ export default {
 
     data() {
         return {
-            stateValue: ''
+            valueLocal: this.value
         }
     },
 
     watch: {
         value() {
-            this.stateValue = this.value;
+            this.valueLocal = this.value;
             return this.value;
         }
     },
 
-    created() {
-        this.stateValue = this.value;
-    },
-
-    updated() {
-        this.stateValue = this.value;
-    },
-
     methods: {
         change() {
-            this.$emit('change', this.stateValue);
+            this.$emit('change', this.valueLocal);
         }
     }
 };

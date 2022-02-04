@@ -1,5 +1,5 @@
 <template>
-    <div class="table" v-show="!collapsed">
+    <div class="table" v-show="!collapsedLocal">
         <div class="table__head" v-if="showHead">
             <div class="table__row">
                 <div
@@ -10,7 +10,7 @@
                     {{col.text}}
                     <button
                         class="table__sort"
-                        :class="{active: (stateSortCol === colIndex), descending: (stateSortCol === colIndex) && stateDescSort}"
+                        :class="{active: (sortColLocal === colIndex), descending: (sortColLocal === colIndex) && descSortLocal}"
                         type="button"
                         title="Отсортировать"
                         @click="sortTable(colIndex)">
@@ -43,8 +43,8 @@
                     :header-cols="headerCols"
                     :body-data="row.inner"
                     :inner="true"
-                    :sort-col="stateSortCol"
-                    :desc-sort="stateDescSort"
+                    :sort-col="sortColLocal"
+                    :desc-sort="descSortLocal"
                     :collapsed="row.collapsed"/>
             </div>
         </div>
@@ -74,7 +74,8 @@ export default {
         },
 
         sortCol: {
-            type: Number
+            type: Number,
+            default: null
         },
         descSort: {
             type: Boolean,
@@ -91,9 +92,9 @@ export default {
     data() {
         return {
             sortedData: [],
-            stateSortCol: null,
-            stateDescSort: false,
-            stateCollapsed: false
+            sortColLocal: this.sortCol,
+            descSortLocal: this.descSort,
+            collapsedLocal: this.collapsed
         };
     },
 
@@ -110,39 +111,32 @@ export default {
         },
 
         sortCol() {
-            this.stateSortCol = this.sortCol;
+            this.sortColLocal = this.sortCol;
         },
         descSort() {
-            this.stateDescSort = this.descSort;
+            this.descSortLocal = this.descSort;
         },
-        stateSortCol() {
+        sortColLocal() {
             this.sortTableData();
         },
-        stateDescSort() {
+        descSortLocal() {
             this.sortTableData();
         },
 
         collapsed() {
-            this.stateCollapsed = this.collapsed;
+            this.collapsedLocal = this.collapsed;
         }
     },
 
     created() {
-        this.resetState();
+        this.sortedData = [...this.bodyData];
     },
 
     methods: {
-        resetState() {
-            this.sortedData = [...this.bodyData];
-            this.stateSortCol = null;
-            this.stateDescSort = false;
-            this.stateCollapsed = this.collapsed;
-        },
-
         sortTableData() {
             this.sortedData.sort((firstItem, secondItem) => {
-                const firstCompared = firstItem.cols[this.stateSortCol];
-                const secondCompared = secondItem.cols[this.stateSortCol];
+                const firstCompared = firstItem.cols[this.sortColLocal];
+                const secondCompared = secondItem.cols[this.sortColLocal];
 
                 if (firstCompared < secondCompared) {
                     return -1;
@@ -154,14 +148,14 @@ export default {
                 return 0;
             });
 
-            if (!this.stateDescSort) {
+            if ((this.sortColLocal !== null) && !this.descSortLocal) {
                 this.sortedData.reverse();
             }
         },
 
         sortTable(colIndex) {
-            this.stateSortCol = colIndex;
-            this.stateDescSort = !this.stateDescSort;
+            this.sortColLocal = colIndex;
+            this.descSortLocal = !this.descSortLocal;
         },
 
         toggleCollapse(row) {

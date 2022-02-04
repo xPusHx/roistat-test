@@ -1,5 +1,5 @@
 <template>
-    <div class="popup" v-show="stateShown">
+    <div class="popup" v-show="isShownLocal">
         <button class="popup__close" type="button" title="Закрыть попап" @click="hide">&times;</button>
 
         <slot></slot>
@@ -19,23 +19,19 @@ export default {
 
     data() {
         return {
-            stateShown: false
+            isShownLocal: this.isShown
         };
     },
 
     watch: {
         isShown() {
-            this.stateShown = this.isShown;
+            this.isShownLocal = this.isShown;
         }
-    },
-
-    created() {
-        this.stateShown = this.isShown;
     },
 
     methods: {
         hide() {
-            this.stateShown = false;
+            this.isShownLocal = false;
             this.$emit('hide');
         }
     }
